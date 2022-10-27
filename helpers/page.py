@@ -6,6 +6,7 @@ import helpers.config_defaults as defaults
 
 class Page:
     def __init__(self, page):
+        self.type = page['type']
         self.key = page['key']
         self.to_email = page['to_email']
         self.from_email = page['from_email']
@@ -13,6 +14,9 @@ class Page:
         self.default_url = page['default_url']
         self.page_url = page['page_url']
         self.admin_mail = page['admin_mail'] if 'admin_mail' in page else page['from_email']
+        self.scroll_element = page['scroll_element'] if 'scroll_element' in page else ''
+        self.wait_load_seconds = page['wait_load_seconds'] if 'wait_load_seconds' in page else defaults.wait_load_seconds
+        self.timeout_for_scroll_seconds = page['timeout_for_scroll_seconds'] if 'timeout_for_scroll_seconds' in page else defaults.timeout_for_scroll_seconds
 
         self.mail_subject = page['mail_subject'] if 'mail_subject' in page else defaults.mail_subject
         self.bs4_block = page['bs4_block'] if 'bs4_block' in page else defaults.bs4_block
@@ -31,7 +35,7 @@ class Page:
 
 
 def check_fields(page: Dict) -> None:
-    keys = ['key', 'to_email', 'from_email', 'default_url', 'page_url', 'gmail_api_key']
+    keys = ['type', 'key', 'to_email', 'from_email', 'default_url', 'page_url', 'gmail_api_key']
     for key in keys:
         if key not in page:
             raise Exception(f'Missing {key} parameter in configuration')

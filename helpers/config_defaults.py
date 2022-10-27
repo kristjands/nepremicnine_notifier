@@ -1,5 +1,8 @@
 mail_subject = 'Nepremicnine changed'
 
+wait_load_seconds = 7
+timeout_for_scroll_seconds = 300
+
 bs4_block = 'div'
 href_parser = 'a'
 bs4_attrs = {"class":"oglas_container", "itemtype": "http://schema.org/ListItem"}

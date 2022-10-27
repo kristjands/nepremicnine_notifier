@@ -32,10 +32,10 @@ class Readers:
             self.parse_ads(soup)
     
     def read_scroll(self):
-        driver = webdriver.Chrome('./chromedriver.exe')
+        driver = webdriver.Chrome('./chromedriver.exe') # TODO
         driver.get(self.page_config.page_url)
 
-        time.sleep(self.page_config.wait_seconds)
+        time.sleep(self.page_config.wait_load_seconds)
 
         try:
             js_func = '''function scrollToBottom() {{
@@ -50,7 +50,7 @@ class Readers:
                         }} 
                     }}, 3000); 
                 }}; 
-                scrollToBottom();'''.format(scroll_element="list__body")
+                scrollToBottom();'''.format(scroll_element=self.page_config.scroll_element)
 
             driver.execute_script(js_func)
 
