@@ -26,6 +26,7 @@ run the bash script on the first run only. I suggest you make a cron tab or nssm
 
 ## Configuration
 The configuration is simple json file, the parameters you need to edit are:
+- `type`: this will be used to seperate different types of pages (either `scroll` for infinate scroll or `page` for normal pagiation)
 - `key`: this will be used to seperate different queries to nepremicnine (and other sites in the future)
 - `default_url`: root url of the page (for instance: "https://www.nepremicnine.net")
 - `page_url`: link of the page you want to scrape, on nepremicnine.net thatis all filters used for search
@@ -47,6 +48,7 @@ Advanced features defaults are set up for nepremicnine.net:
   - `bs4_block`: block in the webpage where we find the info.
   - `bs4_attrs`: is same as before and can be empty.
   - `bs4_class`: with class name for more specific search.
+- TODO
 
 ## Contributors
 - [LukaAndrojna](https://github.com/LukaAndrojna)
