@@ -1,12 +1,12 @@
 import json
-import requests
+
 from os import path
-import concurrent.futures
-from bs4 import BeautifulSoup
 
 from helpers.page import load_configs
 from helpers.listings import Listings
 from helpers.mail import Mail
+from helpers.readers import Readers
+
 
 def main():
     try:
@@ -21,18 +21,7 @@ def main():
                 reviewed_listings = json.load(json_file)
 
             listings = Listings(reviewed_listings)
-            for i in range(1, 1000):
-                page = requests.get(page_config.get_serach_url(i))
-                soup = BeautifulSoup(page.content, 'html.parser')
-
-                ads = soup.find_all(page_config.bs4_block, attrs=page_config.bs4_attrs)
-                ads_len = len(ads)
-                if ads_len == 0:
-                    break
-
-                with concurrent.futures.ThreadPoolExecutor(max_workers=ads_len) as executor:
-                    for ad in ads:
-                        executor.submit(listings.parse_listing, ad, page_config)
+            reader = Readers(page_config, listings)
             
             email_msg = listings.generate_email()
             if email_msg != '':
