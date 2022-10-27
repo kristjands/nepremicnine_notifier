@@ -1,5 +1,5 @@
 import json
-from typing import Dict, List
+from typing import Dict
 
 import helpers.config_defaults as defaults
 
