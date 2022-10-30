@@ -18,6 +18,7 @@ class Page:
         self.default_url = page['default_url']
         self.page_url = page['page_url']
         
+        self.driver = page['driver'] if 'driver' in page else ''
         self.scroll_element = page['scroll_element'] if 'scroll_element' in page else ''
         self.wait_load_seconds = page['wait_load_seconds'] if 'wait_load_seconds' in page else defaults.wait_load_seconds
         self.timeout_for_scroll_seconds = page['timeout_for_scroll_seconds'] if 'timeout_for_scroll_seconds' in page else defaults.timeout_for_scroll_seconds

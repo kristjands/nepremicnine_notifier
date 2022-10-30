@@ -26,7 +26,7 @@ run the bash script on the first run only. I suggest you make a cron tab or nssm
 
 ## Configuration
 The configuration is simple json file, the parameters you need to edit are:
-- `type`: this will be used to seperate different types of pages (either `scroll` for infinate scroll or `page` for normal pagiation)
+- `type`: this will be used to seperate different types of pages (either `scroll` for infinate scroll or `page` for normal pagiation) See next session if you want to run scroll type.
 - `key`: this will be used to seperate different queries to nepremicnine (and other sites in the future)
 - `default_url`: root url of the page (for instance: "https://www.nepremicnine.net")
 - `page_url`: link of the page you want to scrape, on nepremicnine.net thatis all filters used for search
@@ -48,7 +48,11 @@ Advanced features defaults are set up for nepremicnine.net:
   - `bs4_block`: block in the webpage where we find the info.
   - `bs4_attrs`: is same as before and can be empty.
   - `bs4_class`: with class name for more specific search.
+- `driver`: the exact name of driver used for scripting a infinate scroll page
 - TODO
+
+## Scroll page - drivers
+If you want to run the script on a the infinate scroll page, you will need a driver in the root folder of the script. The driver in use is chromedriver, which can be downloaded from the [official webpage](https://chromedriver.chromium.org/). The exact name of the file should be modified in the configuration file and the file should be stored in the root of the script.
 
 ## Contributors
 - [LukaAndrojna](https://github.com/LukaAndrojna)

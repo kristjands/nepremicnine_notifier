@@ -37,7 +37,7 @@ class Readers:
         options = webdriver.ChromeOptions()
         options.add_argument("--log-level=OFF")
 
-        driver = webdriver.Chrome('./chromedriver.exe', options=options)
+        driver = webdriver.Chrome('./{1}'.format(self.page_config.driver), options=options)
         driver.get(self.page_config.page_url)
 
         time.sleep(self.page_config.wait_load_seconds)
