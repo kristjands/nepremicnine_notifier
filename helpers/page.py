@@ -8,20 +8,25 @@ class Page:
     def __init__(self, page):
         self.type = page['type']
         self.key = page['key']
+
         self.to_email = page['to_email']
         self.from_email = page['from_email']
         self.gmail_api_key = page['gmail_api_key']
+        self.admin_mail = page['admin_mail'] if 'admin_mail' in page else page['from_email']
+        self.mail_subject = page['mail_subject'] if 'mail_subject' in page else defaults.mail_subject
+        
         self.default_url = page['default_url']
         self.page_url = page['page_url']
-        self.admin_mail = page['admin_mail'] if 'admin_mail' in page else page['from_email']
+        
         self.scroll_element = page['scroll_element'] if 'scroll_element' in page else ''
         self.wait_load_seconds = page['wait_load_seconds'] if 'wait_load_seconds' in page else defaults.wait_load_seconds
         self.timeout_for_scroll_seconds = page['timeout_for_scroll_seconds'] if 'timeout_for_scroll_seconds' in page else defaults.timeout_for_scroll_seconds
+        self.summary_in_ad = page['summary_in_ad'] if 'summary_in_ad' in page else defaults.summary_in_ad
 
-        self.mail_subject = page['mail_subject'] if 'mail_subject' in page else defaults.mail_subject
         self.bs4_block = page['bs4_block'] if 'bs4_block' in page else defaults.bs4_block
         self.href_parser = page['href_parser'] if 'href_parser' in page else defaults.href_parser
         self.bs4_attrs = page['bs4_attrs'] if 'bs4_attrs' in page else defaults.bs4_attrs
+        
         self.info_attributes_bs4_block = page['info_attributes']['bs4_block'] if 'info_attributes' in page and 'bs4_block' in page['info_attributes'] else defaults.info_attributes_bs4_block
         self.info_attributes_bs4_attrs = page['info_attributes']['bs4_attrs'] if 'info_attributes' in page and 'bs4_attrs' in page['info_attributes'] else defaults.info_attributes_bs4_attrs
         self.info_attributes_bs4_class = page['info_attributes']['bs4_class'] if 'info_attributes' in page and 'bs4_class' in page['info_attributes'] else defaults.info_attributes_bs4_class

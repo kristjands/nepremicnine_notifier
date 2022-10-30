@@ -29,10 +29,15 @@ class Readers:
             page = requests.get(self.page_config.get_serach_url(i))
             soup = BeautifulSoup(page.content, 'html.parser')
 
-            self.parse_ads(soup)
+            if not self.parse_ads(soup):
+                break
     
     def read_scroll(self):
-        driver = webdriver.Chrome('./chromedriver.exe') # TODO
+        page = None
+        options = webdriver.ChromeOptions()
+        options.add_argument("--log-level=OFF")
+
+        driver = webdriver.Chrome('./chromedriver.exe', options=options)
         driver.get(self.page_config.page_url)
 
         time.sleep(self.page_config.wait_load_seconds)
@@ -46,7 +51,7 @@ class Readers:
                             scrollToBottom(); 
                         }} 
                         else {{ 
-                            document.getElementsByTagName("body")[0] += \'<div id="scriptFunctionDoneScrollingToBottom">scriptFunctionDoneScrollingToBottom</div>\'; 
+                            document.getElementsByTagName("body")[0].innerHTML += \'<div id="scriptFunctionDoneScrollingToBottom">scriptFunctionDoneScrollingToBottom</div>\'; 
                         }} 
                     }}, 3000); 
                 }}; 
@@ -65,10 +70,18 @@ class Readers:
         finally:
             driver.quit()
         
+        soup = BeautifulSoup(page, 'html.parser')
+        self.parse_ads(soup)
+        
     def parse_ads(self, soup: BeautifulSoup):
         ads = soup.find_all(self.page_config.bs4_block, attrs=self.page_config.bs4_attrs)
         ads_len = len(ads)
 
+        if ads_len == 0:
+            return False
+
         with concurrent.futures.ThreadPoolExecutor(max_workers=ads_len) as executor:
             for ad in ads:
                 executor.submit(self.listings.parse_listing, ad, self.page_config)
+            
+        return True

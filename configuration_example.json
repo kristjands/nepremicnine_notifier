@@ -12,40 +12,14 @@
             "mail_subject": "Nepremicnine update - Ljubljana okolica",
             "bs4_block": "div",
             "href_parser": "a",
+            "scroll_element": "", 
+            "wait_load_seconds" : 10,
+            "timeout_for_scroll_seconds": 20,
+            "summary_in_ad": "true/false: is the summary in add or is it in the subpage",
             "bs4_attrs": {
                 "class": "oglas_container",
                 "itemtype": "http://schema.org/ListItem"
             },
-            "info_attributes": {
-                "bs4_block": "div",
-                "bs4_attrs": {},
-                "bs4_class": "more_info"
-            },
-            "summary_attributes": {
-                "bs4_block": "div",
-                "bs4_attrs": {},
-                "bs4_class": "kratek"
-            }
-        },
-        {
-            "type": "scroll",
-            "key": "Work",
-            "default_url": "",
-            "page_url": "https://www.iskanjedela.si/search-jobs?jobId=2907754&what=Socialni%20delavec%2Fsocialna%20delavka",
-            "from_email": "example@gmail.com",
-            "gmail_api_key": "generate this in account settings",
-            "to_email": ["example@gmail.com", "example2@gmail.com"],
-            "admin_mail": ["example@gmail.com"],
-            "mail_subject": "Work",
-            "scroll_element": "list__body",
-            "wait_load_seconds": 7,
-            "timeout_for_scroll_seconds": 300,
-            "bs4_block": "a",
-            "href_parser": "a",
-            "bs4_attrs": {
-                "class": "list__item"
-            },
-            "TODO": "TODO",
             "info_attributes": {
                 "bs4_block": "div",
                 "bs4_attrs": {},
