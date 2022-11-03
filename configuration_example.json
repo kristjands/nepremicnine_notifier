@@ -10,11 +10,10 @@
             "to_email": ["example@gmail.com", "example2@gmail.com"],
             "admin_mail": ["example@gmail.com"],
             "mail_subject": "Nepremicnine update - Ljubljana okolica",
-            "driver": "chromedriver.exe",
             "scroll_element": "", 
             "wait_load_seconds" : 10,
             "timeout_for_scroll_seconds": 20,
-            "summary_in_ad": "true/false: is the summary in add or is it in the subpage",
+            "summary_in_ad": "false",
             "bs4_block": "div",
             "href_parser": "a",
             "bs4_attrs": {

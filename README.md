@@ -48,11 +48,14 @@ Advanced features defaults are set up for nepremicnine.net:
   - `bs4_block`: block in the webpage where we find the info.
   - `bs4_attrs`: is same as before and can be empty.
   - `bs4_class`: with class name for more specific search.
-- `driver`: the exact name of driver used for scripting a infinate scroll page
-- TODO
+- `scroll_element`: element that is scrollable, loaded by class name
+- `wait_load_seconds`: time in seconds that will be waited for selenium to open a browser 
+- `timeout_for_scroll_seconds`: time in seconds that will page will be able to scroll - infinate scrolling stops after provided seconds
+- `summary_in_ad`: true or false - if the summary is already loaded on page, we do not need to create multiple requests for single ad, we can simply read it from the already loaded ad
 
-## Scroll page - drivers
-If you want to run the script on a the infinate scroll page, you will need a driver in the root folder of the script. The driver in use is chromedriver, which can be downloaded from the [official webpage](https://chromedriver.chromium.org/). The exact name of the file should be modified in the configuration file and the file should be stored in the root of the script.
+- TODO
+sudo apt-get install chromium-chromedriver
+
 
 ## Contributors
 - [LukaAndrojna](https://github.com/LukaAndrojna)
