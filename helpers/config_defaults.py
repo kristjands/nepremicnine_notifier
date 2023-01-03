@@ -1,3 +1,5 @@
+parser_type = 'requests'
+
 mail_subject = 'Nepremicnine changed'
 
 bs4_block = 'div'

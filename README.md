@@ -26,6 +26,7 @@ run the bash script on the first run only. I suggest you make a cron tab or nssm
 
 ## Configuration
 The configuration is simple json file, the parameters you need to edit are:
+- `parser_type`: this will be used to seperate different parser types (`requests` - fetch requests via request library, `selenium` - mock browser and parse data from there, `json` - parse data from fetched json). Defaults to `requests`.
 - `key`: this will be used to seperate different queries to nepremicnine (and other sites in the future)
 - `default_url`: root url of the page (for instance: "https://www.nepremicnine.net")
 - `page_url`: link of the page you want to scrape, on nepremicnine.net thatis all filters used for search
@@ -47,6 +48,10 @@ Advanced features defaults are set up for nepremicnine.net:
   - `bs4_block`: block in the webpage where we find the info.
   - `bs4_attrs`: is same as before and can be empty.
   - `bs4_class`: with class name for more specific search.
+- `json`: in case of `parser_type` is `json` we set additional configuration
+  - `method`: do we send GET or POST request to fetch a response
+  - `post_body`: in case of POST request we set the body to this value
+  - `pagination`: we append this into sent json in case of POST or in the url in case of GET
 
 ## Contributors
 - [LukaAndrojna](https://github.com/LukaAndrojna)
