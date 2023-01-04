@@ -1,11 +1,12 @@
 import requests
 import concurrent.futures
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, element
+from typing import Tuple
 
-from ..page import Page
-from ..listings import Listings
+from helpers.page import Page
+from helpers.listing import Listing
 
-def parse(page_config: Page, listings: Listings) -> None:
+def parse(page_config: Page, listings) -> None:
     for i in range(1, 1000):
         page = requests.get(page_config.get_serach_url(i))
         soup = BeautifulSoup(page.content, 'html.parser')
@@ -17,4 +18,33 @@ def parse(page_config: Page, listings: Listings) -> None:
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=ads_len) as executor:
             for ad in ads:
-                executor.submit(listings.parse_listing, ad, page_config)
+                executor.submit(listings.parse_listing_requests, ad, page_config)
+
+def get_page_data(URL: str, page_config: Page) -> Tuple[str, str]:
+    page = requests.get(URL)
+    soup = BeautifulSoup(page.content, 'html.parser')
+
+    info = soup.find_all(page_config.info_attributes_bs4_block, class_=page_config.info_attributes_bs4_class, attrs=page_config.info_attributes_bs4_attrs)[0]
+    summary = soup.find_all(page_config.summary_attributes_bs4_block, class_=page_config.summary_attributes_bs4_class, attrs=page_config.summary_attributes_bs4_attrs)[0]
+    
+    if info != None:
+        info = info.text.strip()
+        summary = summary.text.strip()
+        return (info, summary)
+    
+    return ('','')
+
+def get_listing_entry(ad: element.Tag, reviewed_listings: dict, page_config: Page) -> Tuple[Listing, bool]:
+    href = ad.find_all(page_config.href_parser, href=True)[0]['href']
+    URL = href if page_config.default_url == "" else page_config.default_url + href
+
+    if URL in reviewed_listings:
+        return None, False
+
+    info, summary = get_page_data(URL, page_config)
+    listing = Listing(page_url=URL,
+                      summary=summary,
+                      info=info)
+    reviewed_listings[URL] = ''
+
+    return listing, True

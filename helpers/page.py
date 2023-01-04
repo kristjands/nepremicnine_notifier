@@ -35,7 +35,10 @@ class Page:
         self.json_pagination_offset_name = page['json']['pagination_offset_name'] if 'json' in page and 'pagination_offset_name' in page['json'] else None
         self.json_pagination_limit = page['json']['pagination_limit'] if 'json' in page and 'pagination_limit' in page['json'] else None
         self.json_pagination_limit_name = page['json']['pagination_limit_name'] if 'json' in page and 'pagination_limit_name' in page['json'] else None
-
+        self.json_pagination_count_all_name = page['json']['pagination_count_all_name'] if 'json' in page and 'pagination_count_all_name' in page['json'] else None
+        self.json_result_name = page['json']['result_name'] if 'json' in page and 'result_name' in page['json'] else None
+        self.json_info_attributes = page['json']['info_attributes'] if 'json' in page and 'info_attributes' in page['json'] else None
+        
     def get_serach_url(self, i :int) -> str:
         return f'{self.page_url}/{i}/'
 

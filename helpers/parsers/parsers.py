@@ -1,7 +1,7 @@
 from . import parse_json, parse_requests
 
-from ..listings import Listings
-from ..page import Page
+from helpers.listings import Listings
+from helpers.page import Page
 
 class Parsers:
     def __init__(self, page_config: Page, listings: Listings) -> None:
