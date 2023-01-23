@@ -1,19 +1,19 @@
 from . import parse_json, parse_requests
 
 from helpers.listings import Listings
-from helpers.page import Page
 
 class Parsers:
-    def __init__(self, page_config: Page, listings: Listings) -> None:
+    def __init__(self, parser_type: str, page_config, listings: Listings) -> None: # TODO
+        self.parser_type = parser_type
         self.page_config = page_config
         self.listings = listings
 
     def parse(self) -> None:
-        if self.page_config.parser_type == 'requests':
+        if self.parser_type == 'requests':
             return parse_requests.parse(self.page_config, self.listings)
-        # if self.page_config.parser_type == 'selenium':
+        # if self.parser_type == 'selenium':
         #     return
-        if self.page_config.parser_type == 'json':
+        if self.parser_type == 'json':
             return parse_json.parse(self.page_config, self.listings)
 
         raise ValueError('parser_type unknown [{parser_type}]'.format(fname = self.page_config.parser_type))

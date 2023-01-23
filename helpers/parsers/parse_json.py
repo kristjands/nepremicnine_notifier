@@ -3,10 +3,10 @@ import json
 import requests
 from typing import Tuple
 
-from helpers.page import Page
+from helpers.page import PageJson
 from helpers.listing import Listing
 
-def parse(page_config: Page, listings) -> None:
+def parse(page_config: PageJson, listings) -> None:
     fetched_listings = []
     for i in range(0, 1000):
         json_body = json.loads(page_config.json_post_body)
@@ -50,7 +50,7 @@ def flatten_data(data):
     flatten(data)
     return out
 
-def get_page_data(ad, page_config: Page) -> Tuple[str, str]:
+def get_page_data(ad, page_config: PageJson) -> Tuple[str, str]:
     flatten_json = flatten_data(ad)
     info = ''
     summary = ''
@@ -66,8 +66,12 @@ def get_page_data(ad, page_config: Page) -> Tuple[str, str]:
     
     return ('','')
 
-def get_listing_entry(ad, reviewed_listings: dict, page_config: Page) -> Tuple[Listing, bool]:
-    URL = "{0}{1}/{2}".format(page_config.default_url, ad["id"], ad["subjectId"])
+def get_listing_entry(ad, reviewed_listings: dict, page_config: PageJson) -> Tuple[Listing, bool]:
+    postfix = ''
+    for attribute in page_config.json_url_attributes.split(','):
+        postfix += ad[attribute] + '/'
+        
+    URL = '{0}{1}'.format(page_config.default_url, postfix)
 
     if URL in reviewed_listings:
         return None, False

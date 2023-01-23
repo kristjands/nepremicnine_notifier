@@ -1,0 +1,55 @@
+{
+    "pages": [
+        {
+            "key": "LjubljanaMesto",
+            "default_url": "https://www.nepremicnine.net",
+            "page_url": "https://www.nepremicnine.net/oglasi-prodaja/ljubljana-mesto/cena-do-350000-eur,letnik-od-1980/",
+            "from_email": "dskristjan@gmail.com",
+            "gmail_api_key": "nqqkmssysqujhmhd",
+            "to_email": ["kristjan.ds@gmail.com"],
+            "admin_mail": ["kristjan.ds@gmail.com"],
+            "mail_subject": "Nepremicnine update - Ljubljana mesto",
+            "bs4_block": "div",
+            "href_parser": "a",
+            "bs4_attrs": {
+                "class": "oglas_container",
+                "itemtype": "http://schema.org/ListItem"
+            },
+            "info_attributes": {
+                "bs4_block": "div",
+                "bs4_attrs": {},
+                "bs4_class": "more_info"
+            },
+            "summary_attributes": {
+                "bs4_block": "div",
+                "bs4_attrs": {},
+                "bs4_class": "kratek"
+            }
+        },
+        {
+            "parser_type": "json",
+            "key": "Sodisce",
+            "default_url": "https://sodnedrazbe.si/single/",
+            "page_url": "https://api.sodnedrazbe.si/public/publication/list",
+            "from_email": "dskristjan@gmail.com",
+            "gmail_api_key": "nqqkmssysqujhmhd",
+            "to_email": ["kristjan.ds@gmail.com"],
+            "admin_mail": ["kristjan.ds@gmail.com"],
+            "mail_subject": "Sodisce",
+            "json": {
+                "method": "POST",
+                "post_body": "{\"filter\":{\"court\":[\"cf5e251b-f08a-423b-b4b9-2c4ed9ed6cbd\",\"ce1d70b5-4372-4659-b662-bdcf7eeb15c9\",\"b588e4fb-d55e-4c32-83e1-3e9f5dedba03\",\"622004b0-a788-4682-9f0f-e88dd581eb10\",\"727cc631-5bad-4869-aa63-5ec4c259a9eb\",\"16bce50c-38b7-4927-8b4c-106865832b71\",\"7a0e1da5-ac8b-4af8-83d4-f2de8163780d\",\"b2251d02-2466-4408-8ed8-b29be407cb8f\",\"fe6dfb1f-108c-419f-97a5-4901ca6af65e\",\"c78fee28-5674-4b7a-b6b9-08d02959fc46\",\"85037eb5-3dff-4820-9ce5-26d662c8afc0\",\"ef7cac9a-d5c5-4e91-84d6-f417e4c53acf\",\"1d9a572c-1646-429d-989f-5eb8a30bca10\",\"6ec1b6b6-4a94-4bdf-8b8f-0292f84fd6d8\",\"c00ca076-38cd-46fd-97fc-60bb3f591dbb\",\"31bf8935-715e-4546-be37-12a3947675a9\",\"f6fc4763-9768-4a76-bcde-174650d5c3f8\",\"aefe87e2-2abb-433d-91eb-67c33e06a75b\",\"a8245547-bc55-4b9f-9efd-6ff4ff6b3051\",\"9264f6e3-ef3a-4944-a198-e792bc655421\",\"479e7481-534a-411c-9f32-bd18d1a00891\",\"36428684-03c0-4e8c-9fa5-810be64fdf3e\",\"a334851f-d013-410a-bc6c-367abeca8288\",\"98ef57a6-c621-4284-ac50-5eeb1de942d7\",\"f96c55d6-b18c-4448-84ef-5f9c58eb3792\",\"16371b3b-378e-4f2c-b4aa-1f12ce5c2f6a\",\"a72704bc-4529-478f-922a-fc22cc22ef26\",\"3dd809ff-b2e9-44e0-9bf5-ed59c8d8201d\",\"62761e63-a4de-4f0e-8a68-a3d20525d819\",\"13c85c72-dfa8-4b82-998e-b78b0a1d3d9d\",\"ea8d029e-0c3d-4917-8ba5-5d4c6e481b2d\",\"9ea7fe1e-a42b-4cee-abc0-b7476b11cab3\",\"4a818d83-2ae4-48a0-8029-ad2490eeb1a8\",\"bc77c96b-6c2f-4ae1-9250-e04fbaf31f1d\",\"08e97eca-6897-4a18-84e8-1827b9ddc30a\",\"b752eec1-8399-4a5a-ad8c-66b4578fad3b\",\"c612c1d7-0683-4d68-b6fa-69e7355261a5\",\"68582d10-23d4-4272-8f2b-9aacf9b91356\",\"3c894011-55bc-4ae8-a1a4-13fb64f35e56\",\"8a60f9d8-3cfb-46f0-bde8-602d89006a6a\",\"e65fadfc-188e-425e-b039-5655a707cb6d\",\"6873e49a-9ca5-435f-845b-51c7ab63da87\",\"01ee9364-868e-450b-9794-2c8d01a1ea86\",\"e7b7c1ed-6d95-4b08-a2bc-628dd217c660\"],\"saleSubject\":[\"2ee072ab-7833-48e6-9e83-d9cf8d7b92f0\"],\"subjectType\":[\"1452eab8-18d9-4f80-88a7-0073e602e0aa\",\"7d70c0dc-71f7-4b64-9854-444e84219a37\"]},\"sort\":{\"by\":\"publicationAt\",\"direction\":\"desc\"}}",
+                "url_attributes": "id,subjectId",
+                "pagination_name": "pagination",
+                "pagination_offset": "0",
+                "pagination_offset_name": "offset",
+                "pagination_limit": "500",
+                "pagination_limit_name": "limit",
+                "pagination_count_all_name": "countAll",
+                "result_name": "list",
+                "info_attributes": "cadastralMunicipalityName,cadastralMunicipalityCode,parcelNumber,address_street,address_houseNumber,address_zip,address_city,address_region,address_country,propertyKindRelation_valueContent"
+            }
+        }
+    ]
+}
+

@@ -3,15 +3,15 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 
-from helpers.page import Page
+from helpers.page import MailConfig, BaseConfig
 
 class Mail:
     def __init__(self):
         pass
     
-    def set_parameters_listings(self, page_config: Page, msg_body: str):
-        self.from_email = page_config.from_email
-        self.gmail_api_key = page_config.gmail_api_key
+    def set_parameters_listings(self, mail_config: MailConfig, page_config: BaseConfig, msg_body: str):
+        self.from_email = mail_config.from_email
+        self.gmail_api_key = mail_config.gmail_api_key
         self.to_email = list(page_config.to_email) if isinstance(page_config.to_email, str) else page_config.to_email
         self.mail_subject = page_config.mail_subject
         self.msg_body = msg_body
