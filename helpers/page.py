@@ -1,8 +1,6 @@
 import json
 from typing import List, Any, TypeVar, Callable, Type, cast
 
-import helpers.config_defaults as defaults
-
 
 T = TypeVar("T")
 
@@ -280,13 +278,11 @@ class PageRequest(BaseConfig):
 class PageConfiguration:
     requests: List[PageRequest]
     json: List[PageJson]
-    selenium: List[Any]
     mail: MailConfig
 
-    def __init__(self, requests: List[PageRequest], json: List[PageJson], selenium: List[Any], mail: MailConfig) -> None:
+    def __init__(self, requests: List[PageRequest], json: List[PageJson], mail: MailConfig) -> None:
         self.requests = requests
         self.json = json
-        # self.selenium = selenium
         self.mail = mail
 
         for r in requests:
@@ -301,31 +297,29 @@ class PageConfiguration:
         
         requests = from_list(PageRequest.from_dict, obj.get("requests"))
         json = from_list(PageJson.from_dict, obj.get("json"))
-        selenium = from_list(lambda x: x, obj.get("selenium"))
         mail = MailConfig.from_dict(obj.get("mail"))
 
-        return PageConfiguration(requests, json, selenium, mail)
+        return PageConfiguration(requests, json, mail)
 
     def to_dict(self) -> dict:
         result: dict = {}
         
         result["requests"] = from_list(lambda x: to_class(PageRequest, x), self.requests)
         result["json"] = from_list(lambda x: to_class(PageJson, x), self.json)
-        result["selenium"] = from_list(lambda x: x, self.selenium)
         result["mail"] = to_class(MailConfig, self.mail)
         return result
 
 
 def load_json() -> PageConfiguration:
     with open('./configuration.json') as json_file:
-        return PageConfiguration.from_dict(json.loads(json_file.read()))
+        return check_fields_and_load_default(PageConfiguration.from_dict(json.loads(json_file.read())))
 
 
 def dump_json(x: PageConfiguration) -> Any:
     return to_class(PageConfiguration, x)
 
-
-
+def check_fields_and_load_default(page_config: PageConfiguration) -> PageConfiguration:
+    return page_config
 # def check_fields(page: Dict) -> None:
 #     keys = ['key', 'to_email', 'from_email', 'default_url', 'page_url', 'gmail_api_key']
 #     for key in keys:
