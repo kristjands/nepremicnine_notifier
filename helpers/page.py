@@ -103,7 +103,7 @@ class MailConfig:
 
         from_email = from_str(obj.get('from_email'))
         gmail_api_key = from_str(obj.get('gmail_api_key'))
-        admin_mail = from_list(from_str, obj.get('admin_mail')) if 'admin_mail' in obj else None
+        admin_mail = from_list(from_str, obj.get('admin_mail')) if 'admin_mail' in obj else [from_str(obj.get('from_email'))]
         
         return MailConfig(from_email, gmail_api_key, admin_mail)
     
