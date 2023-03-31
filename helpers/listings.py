@@ -4,6 +4,7 @@ from helpers.parsers.parse_requests import get_listing_entry as page_parser_requ
 from helpers.parsers.parse_json import get_listing_entry as page_parser_json
 from helpers.page import PageRequest, PageJson
 
+
 class Listings:
     def __init__(self, reviewed_listings: dict):
         self._reviewed_listings = reviewed_listings

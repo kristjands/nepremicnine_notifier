@@ -6,6 +6,7 @@ from typing import Tuple
 from helpers.page import PageRequest
 from helpers.listing import Listing
 
+
 def parse(page_config: PageRequest, listings) -> None:
     for i in range(1, 1000):
         page = requests.get(page_config.get_serach_url(i))

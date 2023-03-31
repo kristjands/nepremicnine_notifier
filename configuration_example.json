@@ -1,14 +1,11 @@
 {
-    "pages": [
+    "requests": [
         {
-            "key": "LjubljanaOkolica",
+            "key": "LjubljanaMesto",
             "default_url": "https://www.nepremicnine.net",
-            "page_url": "https://www.nepremicnine.net/oglasi-prodaja/ljubljana-okolica/",
-            "from_email": "example@gmail.com",
-            "gmail_api_key": "generate this in account settings",
-            "to_email": ["example@gmail.com", "example2@gmail.com"],
-            "admin_mail": ["example@gmail.com"],
-            "mail_subject": "Nepremicnine update - Ljubljana okolica",
+            "page_url": "https://www.nepremicnine.net/oglasi-prodaja/ljubljana-mesto/cena-do-350000-eur,letnik-od-1980/",
+            "to_email": ["kristjan.ds@gmail.com"],
+            "mail_subject": "Nepremicnine update - Ljubljana mesto",
             "bs4_block": "div",
             "href_parser": "a",
             "bs4_attrs": {
@@ -26,6 +23,33 @@
                 "bs4_class": "kratek"
             }
         }
-    ]
+    ],
+    "json": [
+        {
+            "key": "DelovnaMesta",
+            "default_url": "https://www.ess.gov.si/",
+            "page_url": "https://apigateway-osk8sdmz.ess.gov.si/iskalnik-po-pdm/v1/delovno-mesto/prosta-delovna-mesta-filtri?user_key=5ab0803785c1c97d8e3331d671fcbaa9",
+            "mail_subject": "Delovna mesta update",
+            "to_email": ["example@gmail.com"],
+            "request_method": "POST",
+            "post_body": "{\"nazivDelovnegaMesta\": \"\",\"lokacija\": \"\",\"drzave\": [\"SI\",\"\"],\"datumObjave\": \"\",\"poklicnaPodrocja\": [\"0011\",\"\"],\"regije\": [],\"referenceDelodajalca\": [],\"ravniIzobrazbe\": [],\"urnikDela\": [],\"podrocjaIzobrazbe\": [],\"jeziki\": [],\"delovniCas\": \"\",\"stZadetkov\": 100,\"vrniFiltre\": false,\"urejevalniPojem\": \"0\"}",
+            "url_postfix": "iskalci-zaposlitve/iskanje-zaposlitve/iskanje-dela/?idp={:idDelovnoMesto}/#/pdm/{:idDelovnoMesto}",
+            "url_postfix_macros": "{:idDelovnoMesto}",
+            "info_attributes": "nazivDelovnegaMesta,delodajalec",
+            "pagination_name": "",
+            "pagination_response_name": "steviloDelovnihMest",
+            "pagination_offset": "1",
+            "pagination_offset_name": "stran",
+            "pagination_limit": "500",
+            "pagination_limit_name": "stZadetkov",
+            "pagination_count_all_name": "",
+            "result_name": "seznamDelovnihMest"
+        }
+    ],
+    "selenium": [],
+    "mail": {
+        "from_email": "example@gmail.com",
+        "gmail_api_key": "generate this in account settingsnqqkmssysqujhmhd",
+        "admin_mail": ["example.ds@gmail.com"]
+    }
 }
-

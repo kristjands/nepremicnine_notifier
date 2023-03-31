@@ -5,6 +5,7 @@ from email.mime.multipart import MIMEMultipart
 
 from helpers.page import MailConfig, BaseConfig
 
+
 class Mail:
     def __init__(self):
         pass
