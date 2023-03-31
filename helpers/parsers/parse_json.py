@@ -66,9 +66,13 @@ def get_page_data(ad, page_config: PageJson) -> Tuple[str, str]:
     info = ''
     summary = ''
 
-    for info_item in page_config.info_attributes.split(','):
-        if info_item in flatten_json:
-            info += '{0}: {1}\n'.format(info_item, flatten_json[info_item])
+    if page_config.info_attributes is not None:
+        for info_item in page_config.info_attributes.split(','):
+            if info_item in flatten_json:
+                info += '{0}: {1}\n'.format(info_item, flatten_json[info_item])
+    else:
+        for key in flatten_json:
+            info += '{0}: {1}\n'.format(key, flatten_json[key])
     
     if info != None:
         info = info.strip()
@@ -78,9 +82,10 @@ def get_page_data(ad, page_config: PageJson) -> Tuple[str, str]:
     return ('','')
 
 def get_listing_entry(ad, reviewed_listings: dict, page_config: PageJson) -> Tuple[Listing, bool]:
-    postfix = page_config.url_postfix
+    postfix = page_config.url_postfix if page_config.url_postfix is not None and page_config.url_postfix != '' else ''
     for macro in page_config.url_postfix_macros.split(','):
-        postfix = postfix.replace(macro, ad[macro.replace('{:', '').replace('}', '')])
+        if macro in ad:
+            postfix = postfix.replace('{:%s}' % macro, ad[macro])
 
     URL = '{0}{1}'.format(page_config.default_url, postfix)
 

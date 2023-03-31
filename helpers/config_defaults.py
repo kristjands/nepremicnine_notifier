@@ -1,7 +1,5 @@
-parser_type = 'requests' # TODO?
-
 # BASE
-mail_subject = 'Nepremicnine changed'
+mail_subject = 'Scraper changed'
 
 # REQUESTS
 bs4_block = 'div'
@@ -18,3 +16,4 @@ summary_attributes_bs4_attrs = ''
 summary_attributes_bs4_class = 'kratek'
 
 # JSON
+request_method = 'POST'

@@ -12,9 +12,9 @@ class Parsers:
     def parse(self) -> None:
         if self.parser_type == 'requests':
             return parse_requests.parse(self.page_config, self.listings)
-        if self.parser_type == 'selenium':
-            return
         if self.parser_type == 'json':
             return parse_json.parse(self.page_config, self.listings)
-
+        if self.parser_type == 'selenium':
+            return
+        
         raise ValueError('parser_type unknown [{parser_type}]'.format(fname = self.page_config.parser_type))

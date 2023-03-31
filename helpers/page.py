@@ -103,7 +103,7 @@ class MailConfig:
 
         from_email = from_str(obj.get('from_email'))
         gmail_api_key = from_str(obj.get('gmail_api_key'))
-        admin_mail = from_list(from_str, obj.get('admin_mail'))
+        admin_mail = from_list(from_str, obj.get('admin_mail')) if 'admin_mail' in obj else None
         
         return MailConfig(from_email, gmail_api_key, admin_mail)
     
@@ -114,8 +114,6 @@ class MailConfig:
             not_present.append('from_email')
         if 'gmail_api_key' not in obj:
             not_present.append('gmail_api_key')
-        if 'admin_mail' not in obj:
-            not_present.append('admin_mail')
         
         if len(not_present) > 0:
             raise TypeError('[{0}] Missing mandatory fields'.format(__class__.__name__), not_present)
@@ -174,11 +172,11 @@ class PageJson(BaseConfig):
 
         PageJson.check_mandatory_fields(obj)
 
-        request_method = from_str(obj.get('request_method'))
-        post_body = from_str(obj.get('post_body'))
-        url_postfix = from_str(obj.get('url_postfix'))
-        url_postfix_macros = from_str(obj.get('url_postfix_macros'))
-        info_attributes = from_str(obj.get('info_attributes'))
+        request_method = from_str(obj.get('request_method')) if 'request_method' in obj else config_defaults.request_method
+        post_body = from_str(obj.get('post_body')) if 'post_body' in obj else None
+        url_postfix = from_str(obj.get('url_postfix')) if 'url_postfix' in obj else None
+        url_postfix_macros = from_str(obj.get('url_postfix_macros')) if 'url_postfix_macros' in obj else None
+        info_attributes = from_str(obj.get('info_attributes')) if 'info_attributes' in obj else None
         pagination_name = from_str(obj.get('pagination_name'))
         pagination_response_name = from_str(obj.get('pagination_response_name'))
         pagination_offset = int(from_str(obj.get('pagination_offset')))
@@ -195,17 +193,6 @@ class PageJson(BaseConfig):
     @staticmethod
     def check_mandatory_fields(obj: Any):
         not_present = []
-
-        if 'request_method' not in obj:
-            not_present.append('request_method')
-        if 'post_body' not in obj:
-            not_present.append('post_body')
-        if 'url_postfix' not in obj:
-            not_present.append('url_postfix')
-        if 'url_postfix_macros' not in obj:
-            not_present.append('url_postfix_macros')
-        if 'info_attributes' not in obj:
-            not_present.append('info_attributes')
         if 'pagination_name' not in obj:
             not_present.append('pagination_name')
         if 'pagination_response_name' not in obj:

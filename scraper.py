@@ -61,7 +61,7 @@ def run_single(parser_type: str, page_config, mail_config: MailConfig):
         Mail().set_parameters_error(
                 mail_config.from_email,
                 mail_config.gmail_api_key,
-                mail_config.admin_mail,
+                mail_config.admin_mail if mail_config.admin_mail is not None or mail_config.admin_mail != '' else mail_config.from_email,
                 'Nepremicnine scrapper error occured',
                 mail_body).send()
 
