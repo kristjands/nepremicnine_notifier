@@ -9,11 +9,13 @@ from helpers.listing import Listing
 
 def parse(page_config: PageJson, listings) -> None:
     fetched_listings = []
-    for i in range(0, 100000):
+    max_requests = page_config.number_of_cycles if page_config.number_of_cycles is not None else 100000
+    for i in range(0, max_requests):
         json_body = json.loads(page_config.post_body)
 
-        if page_config.pagination_offset_name != '' and page_config.pagination_limit_name != '':
-            if page_config.pagination_name == '':
+        if page_config.pagination_offset_name is not None and page_config.pagination_limit_name is not None \
+            and page_config.pagination_offset is not None and page_config.pagination_limit is not None:
+            if page_config.pagination_name is None:
                 json_body[page_config.pagination_offset_name] = int(page_config.pagination_offset) + int(page_config.pagination_limit) * i
                 json_body[page_config.pagination_limit_name] = int(page_config.pagination_limit)
             else:
@@ -28,11 +30,10 @@ def parse(page_config: PageJson, listings) -> None:
         response_json = json.loads(response.text)
         fetched_listings.extend(response_json[page_config.result_name])
 
-        if page_config.pagination_response_name in response_json:
-            if page_config.pagination_count_all_name != '':
+        if page_config.pagination_response_name is not None and page_config.pagination_response_name in response_json:
+            if page_config.pagination_count_all_name is not None:
                 if page_config.pagination_count_all_name in response_json[page_config.pagination_response_name]:
                     all_items = int(response_json[page_config.pagination_response_name][page_config.pagination_count_all_name])
-                    
             else:
                 all_items = int(response_json[page_config.pagination_response_name])
             

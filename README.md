@@ -67,14 +67,15 @@ Let's take a look the specifics of each scrapper type.
   - `url_postfix` (optional): this is used to create a link. It is created with combination of property `default_url`. The property can have macros in it `{:macro}`, which will be replaced with the data from the response.
   - `url_postfix_macros` (optional): Macros you used in the `url_postfix` separated with `,` - just the values. Those values must exists in the JSON response.
   - `info_attributes` (optional): JSON properties which will be parsed as the information in email. If nothing is passed all the values in JSON will will be included
-  - `pagination_name`
-  - `pagination_response_name`
-  - `pagination_offset`
-  - `pagination_offset_name`
-  - `pagination_limit`
-  - `pagination_limit_name`
-  - `pagination_count_all_name`
-  - `result_name`
+  - `pagination_name` (optional): This is put into the request JSON, where we can limit the number of items in result per request. This can be added as separate JSON element, which name is equal to set value of this parameter. If it is not set and other `pagiation` parameters are set, they will be append in the request itself (without additional element)
+  - `pagination_offset` (optional): How many elements we want to skip. This value is for the first request, after it is changed based on how many request were already made. If we want to apply this all must be present `pagination_offset_name`, `pagination_limit`, `pagination_limit_name`
+  - `pagination_offset_name` (optional): Name of the JSON field we will append the `pagination_offset`. If we want to apply this all must be present `pagination_offset`, `pagination_limit`, `pagination_limit_name`
+  - `pagination_limit` (optional): How many items in result we want to fetch by one request. If we want to apply this all must be present `pagination_offset`, `pagination_offset_name`, `pagination_limit_name`
+  - `pagination_limit_name` (optional):  Name of the JSON field we will append the `pagination_limit`. If we want to apply this all must be present `pagination_offset`, `pagination_offset_name`, `pagination_limit`
+  - `pagination_response_name` (partially optional): In the response JSON we usually get a value that tells us how many items are there in total. In case that element has different name that `pagination_name` we can set this here otherwise the value from `pagination_name` will be taken.
+  - `pagination_count_all_name` (partially optional): The JSON property where we find total number of items in result (so we know how many request we need to make). If it is empty the 
+  - `number_of_cycles` (partially optional): In case there is no element in the response for counting all elements, we can set the max number of request we want to make.
+  - `result_name`: The name of the JSON response element that holds the items.
 
 ## Contributors
 - [LukaAndrojna](https://github.com/LukaAndrojna)

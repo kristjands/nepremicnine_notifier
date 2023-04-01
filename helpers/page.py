@@ -141,13 +141,14 @@ class PageJson(BaseConfig):
     pagination_limit: int
     pagination_limit_name: str
     pagination_count_all_name: str
+    number_of_cycles: int
     result_name: str
 
     def __init__(self, base_config: BaseConfig, request_method: str, post_body: str,
                 url_postfix: str, url_postfix_macros: str, info_attributes: str, pagination_name: str,
                 pagination_response_name: str, pagination_offset: int, pagination_offset_name: str,
                 pagination_limit: int, pagination_limit_name: str, pagination_count_all_name: str,
-                result_name: str) -> None:
+                number_of_cycles: int, result_name: str) -> None:
         super().__init__(base_config)
 
         self.request_method = request_method
@@ -162,6 +163,7 @@ class PageJson(BaseConfig):
         self.pagination_limit = pagination_limit
         self.pagination_limit_name = pagination_limit_name
         self.pagination_count_all_name = pagination_count_all_name
+        self.number_of_cycles = number_of_cycles
         self.result_name = result_name
 
     @staticmethod
@@ -177,36 +179,25 @@ class PageJson(BaseConfig):
         url_postfix = from_str(obj.get('url_postfix')) if 'url_postfix' in obj else None
         url_postfix_macros = from_str(obj.get('url_postfix_macros')) if 'url_postfix_macros' in obj else None
         info_attributes = from_str(obj.get('info_attributes')) if 'info_attributes' in obj else None
-        pagination_name = from_str(obj.get('pagination_name'))
-        pagination_response_name = from_str(obj.get('pagination_response_name'))
-        pagination_offset = int(from_str(obj.get('pagination_offset')))
-        pagination_offset_name = from_str(obj.get('pagination_offset_name'))
-        pagination_limit = int(from_str(obj.get('pagination_limit')))
-        pagination_limit_name = from_str(obj.get('pagination_limit_name'))
+        pagination_name = from_str(obj.get('pagination_name')) if 'pagination_name' in obj else None
+        pagination_offset = int(from_str(obj.get('pagination_offset'))) if 'pagination_offset' in obj else None
+        pagination_offset_name = from_str(obj.get('pagination_offset_name')) if 'pagination_offset_name' in obj else None
+        pagination_limit = int(from_str(obj.get('pagination_limit'))) if 'pagination_limit' in obj else None
+        pagination_limit_name = from_str(obj.get('pagination_limit_name')) if 'pagination_limit_name' in obj else None
+        pagination_response_name = from_str(obj.get('pagination_response_name')) if 'pagination_response_name' in obj else pagination_name
         pagination_count_all_name = from_str(obj.get('pagination_count_all_name'))
+        number_of_cycles = int(from_str(obj.get('number_of_cycles'))) if 'number_of_cycles' in obj else None
         result_name = from_str(obj.get('result_name'))
         
         return PageJson(base_config, request_method, post_body, url_postfix, url_postfix_macros, info_attributes,
                         pagination_name, pagination_response_name, pagination_offset, pagination_offset_name,
-                        pagination_limit, pagination_limit_name, pagination_count_all_name, result_name)
+                        pagination_limit, pagination_limit_name, pagination_count_all_name, number_of_cycles, result_name)
     
     @staticmethod
     def check_mandatory_fields(obj: Any):
         not_present = []
-        if 'pagination_name' not in obj:
-            not_present.append('pagination_name')
-        if 'pagination_response_name' not in obj:
-            not_present.append('pagination_response_name')
-        if 'pagination_offset' not in obj:
-            not_present.append('pagination_offset')
-        if 'pagination_offset_name' not in obj:
-            not_present.append('pagination_offset_name')
-        if 'pagination_limit' not in obj:
-            not_present.append('pagination_limit')
-        if 'pagination_limit_name' not in obj:
-            not_present.append('pagination_limit_name')
-        if 'pagination_count_all_name' not in obj:
-            not_present.append('pagination_count_all_name')
+        if 'pagination_count_all_name' not in obj and 'number_of_cycles' not in obj and 'pagination_response_name' not in obj:
+            not_present.append('pagination_count_all_name or number_of_cycles or pagination_response_name must be present')
         if 'result_name' not in obj:
             not_present.append('result_name')        
 
