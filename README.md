@@ -46,6 +46,7 @@ All 3 different types of scrapping have some general configuration:
 - `mail_subject` (optional): the subject of the email. Defaults to: `Scraper changed`
 
 Let's take a look the specifics of each scrapper type.
+
 `requests`:
   - `bs4_block` (optional): can differ between pages, change if needed. Defaults to `div`.
   - `href_parser` (optional): used for finding links to advert, can differ between pages, change if needed. Defaults to `a`.
